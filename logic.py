@@ -116,12 +116,18 @@ class TicTacToe2Players(TicTacToeLogic):
         while True:
             print 'Current player: ', self.player_symbol
             player_input = raw_input('Insert cell number for player %s: ' % self.player_symbol)
-            if player_input.isdigit() and self.is_cell_empty(player_input):
-                if 1 <= int(player_input) <= 9:
-                    self.update_table(player_input, self.player_symbol)
-                    return player_input
+            if player_input.isdigit():
+                player_input = int(player_input)
+                if 1 <= player_input <= 9:
+                    if self.is_cell_empty(player_input):
+                        self.update_table(player_input, self.player_symbol)
+                        return player_input
+                    else:
+                        print '==> Cell %s is already taken' % player_input
+                else:
+                    print '==> Number has to be greater of equal to 1 and lower of equal to 9'
             else:
-                print 'This cell (%s) is already taken' % player_input
+                print '==> You have to enter a number between 1 and 9, of any empty cell'
 
 
 class TicTacToeAi(TicTacToeLogic):
@@ -146,7 +152,7 @@ class TicTacToeAi(TicTacToeLogic):
                 if 1 <= player_input <= 9:
                     if self.is_cell_empty(player_input):
                         self.update_table(player_input, self.player_symbol)
-                        self.last_player_input = player_input
+                        self.last_player_input = player_input  # This line is new in Player_vs_AI
                         return player_input
                     else:
                         print '==> Cell %s is already taken' % player_input
