@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/env python2
 
 from logic import TicTacToe2Players
 from logic import TicTacToeAi
